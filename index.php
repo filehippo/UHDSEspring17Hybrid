@@ -14,7 +14,7 @@
 <link rel="apple-touch-icon" sizes="72x72" href="iconlogo.jpg" />
 <link rel="apple-touch-icon" sizes="114x114" href="iconlogo.jpg" />
 <link rel="apple-touch-icon" sizes="144x144" href="iconlogo.jpg" />
-  <title>Territorios</title>
+  <title>Software Engineering</title>
 </head>
 
 
@@ -55,12 +55,39 @@ header("location: profile.php");
 
 
 
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="">Software Engineering </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="database.php">Admin Log in </a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+
+
+
+
+
+
 <div class="container">
   <div class="row" style="margin-top:20px">
     <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
       <form action="" method="post">
         <fieldset>
-          <h2>Munchy admin !!!</h2>
+          <h2>Student Log in</h2>
           <hr class="colorgraph">
           <div class="form-group">
 

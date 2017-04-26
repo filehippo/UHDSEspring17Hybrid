@@ -10,8 +10,9 @@
 
 <head>
 
-  <title>Software Engineering </title>
+  <title>Student Login </title>
 </head>
+
 
 
     <!-- Bootstrap core CSS -->
@@ -39,10 +40,10 @@
   <body>
 
 <?php
-include('adminprofile/login.php'); // Includes Login Script
+include('login.php'); // Includes Login Script
 
 if(isset($_SESSION['login_user'])){
-header("location: adminprofile/profile.php");
+header("location: profile.php");
 }
 ?>
 
@@ -62,11 +63,16 @@ header("location: adminprofile/profile.php");
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="studentprofile/student.php">Student Log in </a></li>
+            <li><a href="../index.php">Admin Log in </a></li>
           </ul>
         </div>
       </div>
     </nav>
+
+
+
+
+
 
 
 
@@ -75,7 +81,7 @@ header("location: adminprofile/profile.php");
     <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
       <form action="" method="post">
         <fieldset>
-          <h2>Admin Log in</h2>
+          <h2>Student Log in</h2>
           <hr class="colorgraph">
           <div class="form-group">
 

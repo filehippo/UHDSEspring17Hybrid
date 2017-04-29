@@ -42,13 +42,7 @@ include('session.php');
       <script src="/cssfiles/JS/respond.min.js"></script>
     <![endif]-->
 
- <script>
-  $(function() {
-    $( "#skills" ).autocomplete({
-      source: '/prengine/search.php'
-    });
-  });
-  </script>
+
 
 <head>
 <title>Software Engineering</title>
@@ -72,7 +66,7 @@ include('session.php');
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="manadmins.php">Manage Admins</a></li>
+            <li><a href="addprof.php">add new proffesor</a></li>
      
             <li><a href="/adminprofile/managecomment.php">Manage Comments </a></li>
             
@@ -116,38 +110,8 @@ echo $login_session;
 
 
 
+          <h2>Admin Student Management.....</h2>
 
-<div class="container">
-  <div class="row" style="margin-top:20px">
-    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-      <form action="" method="post">
-        <fieldset>
-          <h2>Admin Search.....</h2>
-          <hr class="colorgraph">
-          <div class="form-group">
-
-<div class="ui-widget">
-<form name="form1" method = "post" action="/adminprofile/profile.php">
-
-            <input id="skills" input name="skills" type="text" label for="skills" class="form-control input-lg">
-          </div>
-          
-          <hr class="colorgraph">
-          <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6">
-              <input type="submit" name="Submit" value="Search" class="btn btn-lg btn-success btn-block">
-            </div>
-</form>
-</div>
-
-
-            
-          </div>
-        </fieldset>
-      </form>
-    </div>
-  </div>
-</div>
 
 
 
@@ -181,7 +145,7 @@ if ($conn -> connect_error){
 }
 
 
-$sql = "SELECT * FROM `Student` ";
+$sql = "SELECT * FROM `students` ";
 
 
 
@@ -217,19 +181,19 @@ echo"<tr><tbody><tr>
 
 <form action=update.php method=post>
 
-<td><input type=text name=rname value='" . $row["fname"] . "'></td>
-<td><input type=text name=address value='" . $row["lname"] . "'></td>
+<td><input type=text name=rname value='" . $row["finame"] . "'></td>
+<td><input type=text name=address value='" . $row["laname"] . "'></td>
 <td><input type=text name=street value='" . $row["address"] . "'></td>
-<td><input type=text name=state value='" . $row["stname"] . "'></td>
+<td><input type=text name=state value='" . $row["stnames"] . "'></td>
 <td><input type=text name=zipo value='"  . $row["studentid"] . "'></td>
 
-<td><input type=hidden name=id_base value='" . $row["id_base"] . "'></td>
+<td><input type=hidden name=id_student value='" . $row["id_student"] . "'></td>
 
 <td><input type=submit value=Update></td>
 
 </form>
 
-<td><a href =delete.php?id_base=". $row["id_base"] . " >Delete</a></td></tr>";
+<td><a href =delete.php?id_student=". $row["id_student"] . " >Delete</a></td></tr>";
 
 echo"</tbody>";
 
@@ -252,6 +216,65 @@ $conn->close();
 
 
 ?>
+
+
+
+
+<?php
+$servername ="localhost";
+$username ="uhdmunchy";
+$password ="Coffee2017";
+$dbName ="okaymunchy";
+
+$conn = new mysqli($servername, $username, $password, $dbName);
+
+
+$sql=mysql_query("SELECT id_base,name FROM base");
+
+if(mysql_num_rows($sql)){
+
+
+$select= '<select name="select">';
+
+
+while($rs=mysql_fetch_array($sql)){
+
+
+
+
+      $select.='(<option name=var value="'.$rs['id_base'].'">'.$rs['name'].'</option>)';
+
+      
+
+
+  }
+
+//echo "<input type=hidden name=var value='" $select.rs['id_base']. "'>";
+
+
+}
+
+
+$select.='</select>';
+
+
+echo $select;
+
+
+
+
+
+//$top = $_POST['id_base'];
+//$var = $_POST['taskOption'];
+
+?>
+
+
+
+
+
+
+
 
 
     <!-- Bootstrap core JavaScript

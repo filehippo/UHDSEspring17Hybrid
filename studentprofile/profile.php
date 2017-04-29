@@ -182,9 +182,19 @@ if ($conn -> connect_error){
 }
 
 
-$sql = "SELECT finame, name, lname,course
+
+
+
+
+
+$sql = "SELECT name, courses,location,time,lname
 FROM students
-JOIN  `teacher` ON students.id_student =  `teacher`.id_t
+JOIN  `course` ON (`students`.`st_fk`  =  `course`.`core_id` OR `students`.`st_fk2`  =  `course`.`core_id` OR
+ `students`.`st_fk3`  =  `course`.`core_id` OR `students`.`st_fk4`  =  `course`.`core_id`)
+
+Join `teacher` ON `teacher`.`id_teach`=`course`.`professor`
+
+
 AND  `students`.`finame` = '$login_session' ";
 
 
@@ -196,10 +206,11 @@ if ($result-> num_rows >0){
 	echo "<thead>
 <tr>
 
-<th>student</th>
-<th>Professor name</th>
-<th>Prof lastname</th>
-<th>Course</th>
+<th>Proffesor name</th>
+<th>last name</th>
+<th>course</th>
+<th>location</th>
+<th>time</th>
 </tr>";
 echo"</thead>";
 
@@ -208,10 +219,11 @@ echo"</thead>";
 {
 echo"<tbody>
 <tr>
-<td>" . $row["finame"] . "</td>
 <td>" . $row["name"] . "</td>
 <td>" . $row["lname"] . "</td>
-<td>" . $row["course"] . "</td>
+<td>" . $row["courses"] . "</td>
+<td>" . $row["location"] . "</td>
+<td>" . $row["time"] . "</td>
 
 </tr>";
 echo"</tbody>";
@@ -246,6 +258,7 @@ $conn = new mysqli($servername, $username, $password, $dbName);
 if ($conn -> connect_error){
 	die ("connection failed: " . $conn -> connect_error);
 }
+
 
 
 $sql = "SELECT finame, courses, grades

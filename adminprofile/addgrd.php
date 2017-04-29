@@ -42,10 +42,10 @@ include('session.php');
       <script src="/cssfiles/JS/respond.min.js"></script>
     <![endif]-->
 
-
+ 
 
 <head>
-<title>Software Engineering</title>
+<title>Okay Munchy DB</title>
 <link href="/cssfiles/style.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -66,11 +66,9 @@ include('session.php');
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="addprof.php">add new proffesor</a></li>
-     
-            <li><a href="addstu.php">Add new Student</a></li>
-            <li><a href="addgrd.php">Add student grades</a></li>
-            <li><a href="assignst.php">Assign students courses</a></li>
+           
+            <li><a href="profile.php">admin profile </a></li>
+            
           </ul>
         </div>
       </div>
@@ -85,9 +83,7 @@ include('session.php');
 
 
 <div id="profile">
-
 <b id="welcome">Welcome : <i><?php echo $login_session; ?></i></b>
-
 <b id="logout"><a href="/adminprofile/logout.php">Log Out</a></b>
 </div>
 
@@ -95,125 +91,98 @@ include('session.php');
 
 
 
+<div class="container">
+  		<div class="row">
+  			<div class="col-md-6 col-md-offset-3">
+  				<h1 class="page-header text-center">Add student grade</h1>
+
+<!-- This takes the name of the name and sends the input as a post command to the active file called nook.php that inserts to database  -->
+
+				<form class="form-horizontal" role="form" method="POST" action="addgrades.php">
+
+<!-- The Text Box to add Name  -->
+
+					<div class="form-group">
+						<label for="name" class="col-sm-2 control-label">Course</label>
+						<div class="col-sm-10">
+					     <input type="text" class="form-control" id="name" name="name" placeholder="Course Name" >
+					   </div>
+					</div>
+
+<!-- The Text Box to add Street number -->
+
+                                        <div class="form-group">
+						<label for="street number" class="col-sm-2 control-label">Grade</label>
+						   <div class="col-sm-10">
+						      <input type="text" class="form-control" id="stnum" name="stnum" placeholder="Grade is 0-4 numeric" >
+					           </div>
+					        </div>
+
+
+<!-- The Text Box to add locations aka restaurants  -->
 
 
 
 
-          <h2>Admin Student Management.....</h2>
+                <div class="form-group">
+	<label for="street number" class="col-sm-2 control-label">student </label>
+		<div class="col-sm-10">
 
 
 
 
+<?php
 
+$conn = new mysqli('localhost', 'uhdjordan', 'uhdchang', 'uhdpizzaratzz') 
+or die ('Cannot connect to db');
+
+    $result = $conn->query("select id_student, finame from students");
     
+    echo "<html>";
+    echo "<body>";
+    echo "<select name='id_student'>";
 
+    while ($row = $result->fetch_assoc()) {
 
-       <?php
-
-//Started in 12/26/2016 - 9:40 am nook cafe 
-//Alfred Albizures in collaboration with william albizures
-//Completed code on 12/30/2016 - 3:42PM Starbucks wallisville rd
-// 832-414-0264 alfredalbizures@gmail.com
-
-//SQL DataBase log in information from the Cpanel in Godaddy
-
-$servername = "localhost";
-$username ="uhdjordan";
-$password ="uhdchang";
-$dbName ="uhdpizzaratzz";
-
-
-//create connection
-
-$conn = new mysqli($servername, $username, $password, $dbName);
-
-//check connection
-
-if ($conn -> connect_error){
-	die ("connection failed: " . $conn -> connect_error);
+                  unset($id, $name);
+                  $id = $row['id_student'];
+                  $name = $row['finame']; 
+                  echo '<option value="'.$id.'">'.$name.'</option>';
+                 
 }
 
-
-$sql = "SELECT * FROM `students` ";
-
-
-
-
-
-//If there is a connection display the results 
-//It displays in a table format on the buttom 
-//The echo commands display to the website
-
-$result = $conn ->query($sql);
-
-if ($result-> num_rows >0){
-
- echo '<div class="table-responsive">';
- echo '<table class="table table-striped">';
-
-echo "<thead><tr>
-
-<th>name</th>
-<th>lname</th>
-<th>address</th>
-<th>stname</th>
-<th>studentid</th>
-
-
-<th>actions</th></tr>";
-
-echo"</thead>";
-
-	while($row = $result -> fetch_assoc()){
-
-echo"<tr><tbody><tr>
-
-<form action=update.php method=post>
-
-<td><input type=text name=rname value='" . $row["finame"] . "'></td>
-<td><input type=text name=address value='" . $row["laname"] . "'></td>
-<td><input type=text name=street value='" . $row["address"] . "'></td>
-<td><input type=text name=state value='" . $row["stnames"] . "'></td>
-<td><input type=text name=zipo value='"  . $row["studentid"] . "'></td>
-
-<td><input type=hidden name=id_student value='" . $row["id_student"] . "'></td>
-
-<td><input type=submit value=Update></td>
-
-</form>
-
-<td><a href =delete.php?id_student=". $row["id_student"] . " >Delete</a></td></tr>";
-
-echo"</tbody>";
-
-		}
-
-        echo'</table>';
-        echo'</div>';
-
-
-
-
-
-       
-
-}else{
-	echo"0 results";
-}
-
-$conn->close();
-
-
+    echo "</select>";
+    echo "</body>";
+    echo "</html>";
 ?>
 
 
 
+ </div>
+	</div>
 
 
 
 
 
 
+
+
+
+
+					         
+<!-- The Insert button to add send info over to the nook.php file -->
+
+					<div class="form-group">
+						<div class="col-sm-10 col-sm-offset-2">
+						   <input id="submit" name="submit" type="submit" value="Insert" class="btn btn-primary"/>
+	                                           
+					    </div>
+					</div>
+				     </form> 
+			         </div>
+		             </div>
+	                 </div>
 
 
 

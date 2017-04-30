@@ -76,12 +76,6 @@ include('session.php');
 
 
 
-
-
-
-
-
-
 <div id="profile">
 <b id="welcome">Welcome : <i><?php echo $login_session; ?></i></b>
 <b id="logout"><a href="/adminprofile/logout.php">Log Out</a></b>
@@ -94,38 +88,19 @@ include('session.php');
 <div class="container">
   		<div class="row">
   			<div class="col-md-6 col-md-offset-3">
-  				<h1 class="page-header text-center">Add student grade</h1>
+  				<h1 class="page-header text-center">Assign Professor to Class</h1>
 
 <!-- This takes the name of the name and sends the input as a post command to the active file called nook.php that inserts to database  -->
 
-				<form class="form-horizontal" role="form" method="POST" action="addgrades.php">
-
-<!-- The Text Box to add Name  -->
-
-					<div class="form-group">
-						<label for="name" class="col-sm-2 control-label">Course</label>
-						<div class="col-sm-10">
-					     <input type="text" class="form-control" id="name" name="name" placeholder="Course Name" >
-					   </div>
-					</div>
-
-<!-- The Text Box to add Street number -->
-
-                                        <div class="form-group">
-						<label for="street number" class="col-sm-2 control-label">Grade</label>
-						   <div class="col-sm-10">
-						      <input type="text" class="form-control" id="stnum" name="stnum" placeholder="Grade is 0-4 numeric" >
-					           </div>
-					        </div>
-
-
-<!-- The Text Box to add locations aka restaurants  -->
+				<form class="form-horizontal" role="form" method="POST" action="profup.php">
 
 
 
 
-                <div class="form-group">
-	<label for="street number" class="col-sm-2 control-label">student </label>
+
+
+ <div class="form-group">
+	<label for="street number" class="col-sm-2 control-label">Course</label>
 		<div class="col-sm-10">
 
 
@@ -136,17 +111,52 @@ include('session.php');
 $conn = new mysqli('localhost', 'uhdjordan', 'uhdchang', 'uhdpizzaratzz') 
 or die ('Cannot connect to db');
 
-    $result = $conn->query("select id_student, finame from students");
+    $result = $conn->query("select core_id, courses from course");
     
     echo "<html>";
     echo "<body>";
-    echo "<select name='id_student'>";
+    echo "<select name='idss'>";
 
     while ($row = $result->fetch_assoc()) {
 
                   unset($id, $name);
-                  $id = $row['id_student'];
-                  $name = $row['finame']; 
+                  $id = $row['core_id'];
+                  $name = $row['courses']; 
+                  echo '<option value="'.$id.'">'.$name.'</option>';
+                 
+}
+
+    echo "</select>";
+    echo "</body>";
+    echo "</html>";
+?>
+
+ </div>
+	</div>
+
+
+
+ <div class="form-group">
+	<label for="street number" class="col-sm-2 control-label">Professor </label>
+		<div class="col-sm-10">
+
+
+<?php
+
+$conn = new mysqli('localhost', 'uhdjordan', 'uhdchang', 'uhdpizzaratzz') 
+or die ('Cannot connect to db');
+
+    $result = $conn->query("select id_teach, name from teacher");
+    
+    echo "<html>";
+    echo "<body>";
+    echo "<select name='course1'>";
+
+    while ($row = $result->fetch_assoc()) {
+
+                  unset($id, $name);
+                  $id = $row['id_teach'];
+                  $name = $row['name']; 
                   echo '<option value="'.$id.'">'.$name.'</option>';
                  
 }
@@ -161,12 +171,16 @@ or die ('Cannot connect to db');
  </div>
 	</div>
 
+
+
+
+
 					         
 <!-- The Insert button to add send info over to the nook.php file -->
 
 					<div class="form-group">
 						<div class="col-sm-10 col-sm-offset-2">
-						   <input id="submit" name="submit" type="submit" value="Insert" class="btn btn-primary"/>
+						   <input id="submit" name="submit" type="submit" value="Assign" class="btn btn-primary"/>
 	                                           
 					    </div>
 					</div>
@@ -174,99 +188,6 @@ or die ('Cannot connect to db');
 			         </div>
 		             </div>
 	                 </div>
-
-
-<?php
-//Alfred Albizures in collaboration with william albizures
-// 832-414-0264 alfredalbizures@gmail.com
-
-//SQL DataBase log in information from the Cpanel in Godaddy
-
-$servername = "localhost";
-$username ="uhdjordan";
-$password ="uhdchang";
-$dbName ="uhdpizzaratzz";
-
-
-//create connection
-
-$conn = new mysqli($servername, $username, $password, $dbName);
-
-//check connection
-
-if ($conn -> connect_error){
-	die ("connection failed: " . $conn -> connect_error);
-}
-
-
-$sql = "SELECT gr_id,finame,courses,grades FROM students
-
-JOIN `gradez` ON students.id_student = `gradez`.gr_fk ";
-
-
-
-//If there is a connection display the results 
-//It displays in a table format on the buttom 
-//The echo commands display to the website
-
-$result = $conn ->query($sql);
-
-if ($result-> num_rows >0){
-
- echo '<div class="table-responsive">';
- echo '<table class="table table-striped">';
-
-echo "<thead><tr>
-
-<th>name</th>
-<th>course</th>
-<th>grade</th>
-
-
-</tr>";
-
-echo"</thead>";
-
-	while($row = $result -> fetch_assoc()){
-
-echo"<tr><tbody><tr>
-
-
-
-<form action=updategradez.php method=post>
-
-<td><input type=text name=rname value='" . $row["finame"] . "'></td>
-<td><input type=text name=course value='" . $row["courses"] . "'></td>
-<td><input type=text name=grades value='" . $row["grades"] . "'></td>
-
-<td><input type=hidden name=gr_id value='" . $row["gr_id"] . "'></td>
-
-<td><input type=submit value=Update></td>
-
-</form>
-
-<td><a href =deletegradez.php?gr_id=". $row["gr_id"] . " >Delete</a></td></tr>";
-
-echo"</tbody>";
-
-		}
-
-        echo'</table>';
-        echo'</div>';
-
-}else{
-	echo"0 results";
-}
-
-$conn->close();
-
-
-?>
-
-
-
-
-
 
 
     <!-- Bootstrap core JavaScript

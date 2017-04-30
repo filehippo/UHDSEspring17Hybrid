@@ -70,7 +70,8 @@ include('session.php');
      
             <li><a href="addstu.php">Add new Student</a></li>
             <li><a href="addgrd.php">Add student grades</a></li>
-            <li><a href="assignst.php">Assign students courses</a></li>
+            <li><a href="assignst.php">Assign courses to students</a></li>
+            <li><a href="profas.php">Assign Professor to class</a></li>
           </ul>
         </div>
       </div>

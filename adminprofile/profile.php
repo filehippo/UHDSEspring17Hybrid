@@ -109,7 +109,7 @@ include('session.php');
     
 
 
-       <?php
+    <?php
 
 //Started in 12/26/2016 - 9:40 am nook cafe 
 //Alfred Albizures in collaboration with william albizures
@@ -118,15 +118,20 @@ include('session.php');
 
 //SQL DataBase log in information from the Cpanel in Godaddy
 
-$servername = "localhost";
-$username ="uhdjordan";
-$password ="uhdchang";
-$dbName ="uhdpizzaratzz";
+class pass
+{
+
+const servername = "localhost";
+const username = "uhdjordan";
+const password = "uhdchang";
+const dbName = "uhdpizzaratzz";
+
+}
 
 
 //create connection
 
-$conn = new mysqli($servername, $username, $password, $dbName);
+$conn = new mysqli(pass::servername, pass::username, pass::password, pass::dbName);
 
 //check connection
 

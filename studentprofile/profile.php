@@ -99,14 +99,21 @@ include('session.php');
 //Testing join operation on database sql query to finish this assignment 
 //SQL DataBase log in information to connect to the database
 
-$servername ="localhost";
-$username ="uhdjordan";
-$password ="uhdchang";
-$dbName ="uhdpizzaratzz";
+
+class pass
+{
+
+const servername = "localhost";
+const username = "uhdjordan";
+const password = "uhdchang";
+const dbName = "uhdpizzaratzz";
+
+}
+
 
 //creates the database connection
 
-$conn = new mysqli($servername, $username, $password, $dbName);
+$conn = new mysqli(pass::servername, pass::username, pass::password, pass::dbName);
 
 if ($conn -> connect_error){
 	die ("connection failed: " . $conn -> connect_error);
@@ -170,12 +177,9 @@ $conn->close();
 
 <?php
 
-$servername ="localhost";
-$username ="uhdjordan";
-$password ="uhdchang";
-$dbName ="uhdpizzaratzz";
 
-$conn = new mysqli($servername, $username, $password, $dbName);
+
+$conn = new mysqli(pass::servername, pass::username, pass::password, pass::dbName);
 
 if ($conn -> connect_error){
 	die ("connection failed: " . $conn -> connect_error);
@@ -248,12 +252,9 @@ $conn->close();
 
 <?php
 
-$servername ="localhost";
-$username ="uhdjordan";
-$password ="uhdchang";
-$dbName ="uhdpizzaratzz";
 
-$conn = new mysqli($servername, $username, $password, $dbName);
+
+$conn = new mysqli(pass::servername, pass::username, pass::password, pass::dbName);
 
 if ($conn -> connect_error){
 	die ("connection failed: " . $conn -> connect_error);
